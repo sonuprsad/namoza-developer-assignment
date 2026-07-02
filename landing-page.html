@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book an Orthopaedic Consultation in Bengaluru | OrthoNow</title>
+<meta name="description" content="Get an expert orthopaedic opinion for knee or back pain. Same-week appointments across 9 OrthoNow clinics in Bengaluru.">
+
+<!--
+  PERFORMANCE NOTES (read this before touching fonts/images):
+  - Zero external requests by design. No Google Fonts, no CDN scripts, no hero photo.
+    That's not a placeholder shortcut — it's the actual strategy for hitting 90+ mobile
+    on PageSpeed without gambling on font-loading or image-compression edge cases.
+  - Type is a system-font stack. It renders instantly (0ms network wait, no FOUT/FOIT)
+    and still lets us pair a serif display against a sans body for contrast — see
+    the --font-display / --font-body vars below.
+  - No images = no LCP image to optimise/fail on. The "trust element" and hero visual
+    are both drawn in inline SVG (text, so it's compressed with the HTML, no extra request).
+  - Everything critical is inline (this whole file IS the critical path).
+-->
+
+<style>
+  :root {
+    /* ---- Design tokens ----
+       Palette: deep clinical teal (not hospital blue, not the usual AI cream+terracotta
+       combo) + a confident amber CTA that reads as "action" against the cool teal.
+       Background is a cool off-white (mint-grey), not cream, to stay out of template territory. */
+    --teal-900: #0b3d3a;
+    --teal-800: #0f4f4a;
+    --teal-700: #156059;
+    --teal-tint: #e6f0ee;
+    --bg: #f5f8f7;
+    --ink: #10201d;
+    --ink-soft: #4a5b57;
+    --amber: #f0a202;
+    --amber-dark: #c98400;
+    --card-shadow: 0 20px 40px -20px rgba(11, 61, 58, 0.35);
+    --radius: 14px;
+
+    --font-display: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  img, svg { max-width: 100%; display: block; }
+  a { color: inherit; }
+
+  .container {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* ---- Header ---- */
+  header {
+    background: var(--teal-900);
+    color: #fff;
+    padding: 14px 0;
+  }
+  .header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 0.3px;
+  }
+  .logo span { color: var(--amber); }
+  .header-call {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.35);
+    padding: 7px 12px;
+    border-radius: 999px;
+  }
+
+  /* ---- Hero ---- */
+  .hero {
+    background: var(--teal-900);
+    color: #fff;
+    padding: 28px 0 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  /* Signature element: a single-line SVG joint/motion motif, quiet, in the corner —
+     reinforces "orthopaedic" without a stock photo of someone holding their knee. */
+  .hero-motif {
+    position: absolute;
+    right: -40px;
+    top: -10px;
+    width: 220px;
+    opacity: 0.14;
+    pointer-events: none;
+  }
+  .eyebrow {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin: 0 0 10px;
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-size: 30px;
+    line-height: 1.18;
+    margin: 0 0 12px;
+    font-weight: 700;
+  }
+  .subhead {
+    font-size: 16px;
+    color: #d9e6e3;
+    margin: 0;
+    max-width: 42ch;
+  }
+
+  /* ---- Form card ---- */
+  .form-card {
+    background: #fff;
+    border-radius: var(--radius);
+    box-shadow: var(--card-shadow);
+    padding: 22px 20px;
+    margin: -26px 20px 0;
+    position: relative;
+    z-index: 2;
+  }
+  .form-card h2 {
+    font-size: 17px;
+    margin: 0 0 4px;
+  }
+  .form-card .form-sub {
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    margin: 0 0 16px;
+  }
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--teal-900);
+  }
+  .field { margin-bottom: 14px; }
+  input[type="text"],
+  input[type="tel"] {
+    width: 100%;
+    padding: 13px 14px;
+    font-size: 16px; /* 16px minimum: prevents iOS Safari auto-zoom on focus */
+    border: 1.5px solid #d7e2df;
+    border-radius: 10px;
+    font-family: var(--font-body);
+    background: #fbfdfc;
+  }
+  input:focus {
+    outline: 3px solid var(--teal-700);
+    outline-offset: 1px;
+    border-color: var(--teal-700);
+  }
+  .field-error {
+    display: none;
+    color: #b3261e;
+    font-size: 12.5px;
+    margin-top: 5px;
+  }
+  .field.has-error input { border-color: #b3261e; }
+  .field.has-error .field-error { display: block; }
+
+  .cta-btn {
+    width: 100%;
+    background: var(--amber);
+    color: var(--teal-900);
+    font-size: 16.5px;
+    font-weight: 700;
+    padding: 15px 16px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 4px;
+    transition: background 0.15s ease, transform 0.05s ease;
+  }
+  .cta-btn:hover { background: var(--amber-dark); }
+  .cta-btn:active { transform: scale(0.99); }
+  .cta-btn:focus-visible { outline: 3px solid var(--teal-700); outline-offset: 2px; }
+
+  .microcopy {
+    text-align: center;
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 10px;
+  }
+
+  /* ---- Thank you state ---- */
+  .thank-you {
+    display: none;
+    text-align: center;
+    padding: 10px 0 4px;
+  }
+  .thank-you.is-visible { display: block; }
+  .form-card.is-submitted .booking-form { display: none; }
+  .thank-you-icon {
+    width: 52px;
+    height: 52px;
+    margin: 0 auto 14px;
+  }
+  .thank-you h2 { margin-bottom: 6px; }
+  .thank-you p { font-size: 14px; color: var(--ink-soft); margin: 0; }
+
+  /* ---- Trust bar ---- */
+  .trust-bar {
+    margin: 26px 20px 0;
+    background: var(--teal-tint);
+    border-radius: var(--radius);
+    padding: 16px 14px;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    gap: 6px;
+  }
+  .trust-stat .num {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--teal-900);
+    display: block;
+  }
+  .trust-stat .label {
+    font-size: 11px;
+    color: var(--ink-soft);
+    line-height: 1.3;
+  }
+
+  /* ---- Credential line ---- */
+  .credential {
+    margin: 20px 20px 0;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .credential svg { flex-shrink: 0; margin-top: 2px; }
+
+  footer {
+    margin-top: 34px;
+    padding: 18px 20px 30px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+
+  /* ---- Larger screens: still mobile-first, this is a progressive enhancement, not
+         a separate "desktop layout" bolted on ---- */
+  @media (min-width: 640px) {
+    .container { max-width: 720px; }
+    h1 { font-size: 38px; }
+    .subhead { font-size: 17.5px; }
+    .form-card { max-width: 480px; margin: -30px auto 0; }
+    .trust-bar { max-width: 480px; margin: 26px auto 0; }
+    .credential { max-width: 480px; margin: 20px auto 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container header-row">
+    <div class="logo">Ortho<span>Now</span></div>
+    <a href="tel:+918041234567" class="header-call" data-cta="call-now" data-click-location="header">
+      Call Now
+    </a>
+  </div>
+</header>
+
+<section class="hero">
+  <!-- Signature motif: single-line SVG suggesting joint/motion, quiet in the background -->
+  <svg class="hero-motif" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M40 20 Q40 70 90 80 Q140 90 140 140 Q140 170 170 180" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="40" cy="20" r="8" fill="none" stroke="#ffffff" stroke-width="3"/>
+    <circle cx="90" cy="80" r="8" fill="none" stroke="#ffffff" stroke-width="3"/>
+    <circle cx="140" cy="140" r="8" fill="none" stroke="#ffffff" stroke-width="3"/>
+  </svg>
+  <div class="container">
+    <p class="eyebrow">Knee &amp; Back Pain Specialists · Bengaluru</p>
+    <h1>Get an expert orthopaedic opinion — before the pain decides your week for you.</h1>
+    <p class="subhead">Same-week appointments with orthopaedic specialists across Bengaluru. No referral needed.</p>
+  </div>
+</section>
+
+<div class="form-card" id="formCard">
+  <form class="booking-form" id="consultForm" novalidate>
+    <h2>Book your consultation</h2>
+    <p class="form-sub">Takes 20 seconds. Our team calls you back to confirm a slot.</p>
+
+    <div class="field" id="nameField">
+      <label for="fullName">Full name</label>
+      <input type="text" id="fullName" name="fullName" autocomplete="name" placeholder="e.g. Ramesh Kumar">
+      <p class="field-error">Please enter your name.</p>
+    </div>
+
+    <div class="field" id="phoneField">
+      <label for="phone">Phone number</label>
+      <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="numeric" placeholder="10-digit mobile number" maxlength="10">
+      <p class="field-error">Please enter a valid 10-digit mobile number.</p>
+    </div>
+
+    <button type="submit" class="cta-btn">Book My Consultation</button>
+    <p class="microcopy">We'll call you within a few hours to confirm your slot and clinic.</p>
+  </form>
+
+  <div class="thank-you" id="thankYou">
+    <svg class="thank-you-icon" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="26" cy="26" r="25" fill="none" stroke="#0f4f4a" stroke-width="2"/>
+      <path d="M15 27 L22 34 L38 17" fill="none" stroke="#0f4f4a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <h2>Request received</h2>
+    <p>Our care team will call you shortly to confirm your appointment and nearest clinic.</p>
+  </div>
+</div>
+
+<div class="trust-bar">
+  <div class="trust-stat"><span class="num">9</span><span class="label">Clinics across 3 cities</span></div>
+  <div class="trust-stat"><span class="num">40k+</span><span class="label">Patients treated</span></div>
+  <div class="trust-stat"><span class="num">4.7★</span><span class="label">Average patient rating</span></div>
+</div>
+
+<div class="credential">
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M10 2L3 5V9C3 13.4 5.9 17.4 10 18C14.1 17.4 17 13.4 17 9V5L10 2Z" stroke="#0f4f4a" stroke-width="1.5" stroke-linejoin="round"/>
+  </svg>
+  <span>All consultations are led by MBBS/MS orthopaedic specialists, not general physicians.</span>
+</div>
+
+<footer>
+  OrthoNow — Bengaluru · Hyderabad · Chennai &nbsp;|&nbsp; <a href="tel:+918041234567">+91 80 4123 4567</a>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  // Ensure dataLayer exists before we push anything, in case GTM hasn't
+  // initialised yet (or this page ever runs without the GTM snippet during dev/testing).
+  window.dataLayer = window.dataLayer || [];
+
+  var form = document.getElementById('consultForm');
+  var formCard = document.getElementById('formCard');
+  var thankYou = document.getElementById('thankYou');
+  var nameInput = document.getElementById('fullName');
+  var phoneInput = document.getElementById('phone');
+  var nameField = document.getElementById('nameField');
+  var phoneField = document.getElementById('phoneField');
+
+  // Keep phone input numeric-only as the user types — reduces bad submissions
+  // more effectively than validating after the fact.
+  phoneInput.addEventListener('input', function () {
+    phoneInput.value = phoneInput.value.replace(/\D/g, '').slice(0, 10);
+  });
+
+  function isValidName(value) {
+    return value.trim().length >= 2;
+  }
+
+  function isValidPhone(value) {
+    // Indian mobile numbers: 10 digits, starting 6-9.
+    return /^[6-9]\d{9}$/.test(value.trim());
+  }
+
+  function setFieldError(fieldEl, hasError) {
+    fieldEl.classList.toggle('has-error', hasError);
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    var nameValid = isValidName(nameInput.value);
+    var phoneValid = isValidPhone(phoneInput.value);
+
+    setFieldError(nameField, !nameValid);
+    setFieldError(phoneField, !phoneValid);
+
+    if (!nameValid || !phoneValid) {
+      // Move focus to the first invalid field — helps keyboard/screen-reader users,
+      // and on mobile it keeps the person from having to hunt for the error.
+      (nameValid ? phoneInput : nameInput).focus();
+      return;
+    }
+
+    // ---- The actual requirement: dataLayer push on submit, not on page load ----
+    // This fires only after validation passes, i.e. on a genuine successful submit.
+    window.dataLayer.push({
+      event: 'consultation_form_submitted',
+      form_id: 'landing_consultation_form',
+      page_path: window.location.pathname,
+      campaign: 'expert_orthopaedic_opinion'
+    });
+
+    // In production this is where the actual API call to create/update the
+    // HubSpot contact would go (see Task 3 for the full architecture — this
+    // page intentionally doesn't call a live CRM endpoint since there isn't
+    // one to call in this assignment).
+    // Example shape of what that call would look like:
+    //
+    // fetch('/api/leads', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({
+    //     name: nameInput.value.trim(),
+    //     phone: phoneInput.value.trim(),
+    //     source: 'Google Ads - Consultation Landing Page'
+    //   })
+    // });
+
+    formCard.classList.add('is-submitted');
+    thankYou.classList.add('is-visible');
+    thankYou.setAttribute('tabindex', '-1');
+    thankYou.focus();
+  });
+
+  // Call-now click tracking (Task 1 schema: call_now_click)
+  document.querySelectorAll('[data-cta="call-now"]').forEach(function (el) {
+    el.addEventListener('click', function () {
+      window.dataLayer.push({
+        event: 'call_now_click',
+        click_location: el.getAttribute('data-click-location') || 'unknown',
+        clinic_name: 'not_applicable_landing_page',
+        phone_number: el.getAttribute('href').replace('tel:', '')
+      });
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
