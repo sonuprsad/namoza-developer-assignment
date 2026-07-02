@@ -42,9 +42,3 @@ Submission for the Developer (Client Web + Martech) role. Three tasks, each in i
   in this assignment where getting it wrong doesn't just look bad in a report, it actually loses
   patient data in production.
 
-## Still to do before this ships to Namoza
-- [ ] Run the landing page through PageSpeed Insights (Mobile) and add the screenshot
-- [ ] Record the Loom (script drafted in `loom-script.md` — not part of the graded repo, just my
-      own notes so I don't ramble past 8 minutes)
-- [ ] Push to a public repo / share with himanshu@namoza.com
-- [ ] Email repo + Loom links to naman@namoza.com, subject: `Developer Assignment - [Your Name]`
