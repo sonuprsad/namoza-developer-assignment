@@ -27,6 +27,7 @@ Submission for the Developer (Client Web + Martech) role. Three tasks, each in i
   Insights myself and drop the screenshot in before this goes to Namoza — see
   `PAGESPEED-NOTES.md` for why I'm confident it'll clear 90 and what to check if it doesn't.
 - **Task 3** — `task-3-integration/Task3-Integration.md`, ~390 words as scoped.
+- Run this app :  https://namozaa.netlify.app/
 
 ## A few decisions I want to be upfront about
 
